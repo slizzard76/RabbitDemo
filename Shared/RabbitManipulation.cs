@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using Serilog;
@@ -10,7 +11,7 @@ namespace Shared
     public interface IRabbitManipulation
     {
         public void InitRabbitMQ(bool isListener);
-        public void SendMessage(string message);
+        public Task SendMessage(string message);
         public IConnection Connection { get; }
 
         public IModel GetModel();
@@ -63,7 +64,7 @@ namespace Shared
            }
         }
 
-        public void SendMessage(string message)
+        public Task SendMessage(string message)
         {
             try
             {
@@ -78,6 +79,7 @@ namespace Shared
                 Log.Logger.Error(e.Message);
                 Log.Logger.Error("If NOT FOUND exception occured pls try start listener first");
             }
+            return Task.CompletedTask;
         }
 
         public IModel GetModel()

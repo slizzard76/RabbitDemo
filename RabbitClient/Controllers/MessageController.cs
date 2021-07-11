@@ -20,9 +20,9 @@ namespace RabbitClient.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post([FromBody] string value)
         {
-            _rabbitManipulation.SendMessage(value);
+            await _rabbitManipulation.SendMessage(value);
         }
     }
 }
