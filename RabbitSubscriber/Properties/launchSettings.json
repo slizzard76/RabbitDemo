@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:6680",
-      "sslPort": 44308
+      "applicationUrl": "http://localhost:58653",
+      "sslPort": 44388
     }
   },
   "profiles": {
@@ -17,9 +17,15 @@
     },
     "RabbitSubscriber": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "HostName": "localhost",
+        "Port": "5672",
+        "UserName": "guest",
+        "Password": "guest",
+        "ExchangeName": "ExchangeNameDemo",
+        "QueueName": "QueueNameDemo"
       },
       "dotnetRunMessages": "true",
       "applicationUrl": "https://localhost:5001;http://localhost:5000"

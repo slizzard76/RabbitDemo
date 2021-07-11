@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["RabbitSubscriber/RabbitSubscriber.csproj", "RabbitSubscriber/"]
-RUN dotnet restore "RabbitSubscriber/RabbitSubscriber.csproj"
+COPY ["RabbitClient/RabbitClient.csproj", "RabbitClient/"]
+RUN dotnet restore "RabbitClient/RabbitClient.csproj"
 COPY . .
-WORKDIR "/src/RabbitSubscriber"
-RUN dotnet build "RabbitSubscriber.csproj" -c Release -o /app/build
+WORKDIR "/src/RabbitClient"
+RUN dotnet build "RabbitClient.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "RabbitSubscriber.csproj" -c Release -o /app/publish
+RUN dotnet publish "RabbitClient.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "RabbitSubscriber.dll"]
+ENTRYPOINT ["dotnet", "RabbitClient.dll"]
